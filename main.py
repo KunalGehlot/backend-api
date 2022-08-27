@@ -5,6 +5,7 @@ import uvicorn  # Sweet little Async SGI
 from routes import yt
 from fastapi import FastAPI  # We need a Fast, Scalable API
 from handlers.async_ops import worker
+from data.mongo_setup import global_init
 
 # Initialize the logger
 logger = logging.basicConfig(
@@ -33,6 +34,9 @@ async def main() -> None:
 if __name__ == "__main__":
     logger.info("Starting up fam(ily)")
     uvicorn.run(app, port=8888)  # Run the app on port 8888
+
+    logger.info("Initializing MongoDB")
+    global_init()  # Initialize the database
 
     logger.info("Starting Backgroung Async Tasks")
     asyncio.run(main())  # Run the main function in the background

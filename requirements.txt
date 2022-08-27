@@ -5,4 +5,5 @@ mongodb
 gunicorn
 requests
 datetime
+mongoengine
 fastapi-utils

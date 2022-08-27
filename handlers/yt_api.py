@@ -12,7 +12,7 @@ HEADERS = {
 
 async def list_videos(
     key,
-    q="Pizza",
+    q="Food",  # I'm just hungry...
     order="date",
     qtype="video",
     max_results=25,
