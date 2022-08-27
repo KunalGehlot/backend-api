@@ -1,4 +1,4 @@
-from schema import schema
+from .schema import schema
 from fastapi import FastAPI
 from fastapi_utils.inferring_router import InferringRouter
 

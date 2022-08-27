@@ -1,3 +1,4 @@
+import sys
 import logging  # Cannot have an API without a logger
 import asyncio  # Asyncio is a library that allows you to write async programs
 import uvicorn  # Sweet little Async SGI
@@ -10,7 +11,9 @@ from data.mongo_setup import global_init
 # Initialize the logger
 logger = logging.basicConfig(
     level=logging.DEBUG,
-    format="%(asctime)s %(name)s %(levelname)s:%(message)s",
+    format="%(asctime)s %(name)s %(levelname)s : %(message)s",
+    handlers=[logging.FileHandler("fam(ily).log"),
+              logging.StreamHandler(sys.stdout)],
 )
 logger = logging.getLogger(__name__)
 # Initialize FastAPI

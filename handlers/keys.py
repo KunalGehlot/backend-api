@@ -42,7 +42,7 @@ def update_keys(keys):
         raise OSError
 
 
-def process_keys(keys) -> tuple(dict, int):
+def process_keys(keys) -> tuple[dict, int]:
     """
     Processes the keys and returns the key
     which is still valid
@@ -54,6 +54,6 @@ def process_keys(keys) -> tuple(dict, int):
 
     logger.debug("Processing keys")
 
-    for item, index in enumerate(keys):
+    for index, item in enumerate(keys):
         if keys[item]["status"] == "OK":
             return item, index
