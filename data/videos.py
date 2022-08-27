@@ -12,4 +12,8 @@ class Video(mongoengine.Document):
     thumb = StringField(required=True)
     URL = StringField(required=True)
 
-    meta = {"collection": "videos", "db_alias": "default"}
+    meta = {
+        "collection": "videos", 
+        "db_alias": "default", 
+        "indexes": ["videoId"]
+    }

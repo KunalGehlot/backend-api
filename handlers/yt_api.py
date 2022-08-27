@@ -1,7 +1,7 @@
 import logging
 import requests
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("my_logger")
 
 BASE_URL = "https://www.googleapis.com/youtube/v3/search"
 # Some default headers for the requests
@@ -16,7 +16,7 @@ async def list_videos(
     q="Food",  # I'm just hungry...
     order="date",
     qtype="video",
-    max_results=25,
+    max_results=2,
     part="snippet",
     published_after="2019-01-01T00:00:00Z",
 ) -> requests.Response:
@@ -48,7 +48,7 @@ async def list_videos(
     }
     logger.info("Searching for videos")
     try:
-        res = await requests.get(
+        res = requests.get(
             BASE_URL, headers=HEADERS, params=params
         )  # GET request to the YouTube API
         res.raise_for_status()
@@ -71,4 +71,4 @@ async def list_videos(
         if "403" in str(err):  # Handle the 403 error
             logger.error("Quota exceeded")
             return 403
-        logger.error("OOps: Something Else", err)
+        logger.error("Oops: Something Else", err)

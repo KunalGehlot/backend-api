@@ -1,7 +1,7 @@
 import json
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("my_logger")
 
 
 def get_keys() -> list():
@@ -55,5 +55,5 @@ def process_keys(keys) -> tuple[dict, int]:
     logger.debug("Processing keys")
 
     for index, item in enumerate(keys):
-        if keys[item]["status"] == "OK":
+        if keys[index]["status"] == "OK":
             return item, index

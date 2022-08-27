@@ -4,7 +4,7 @@ from .yt_api import list_videos
 from .keys import get_keys, update_keys, process_keys
 from .db_services import store_data
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("my_logger")
 
 
 async def worker() -> None:
@@ -32,7 +32,7 @@ async def worker() -> None:
     logger.debug("Cleaning the response")
     data = clean_res(api_res)  # Pick the values needed to be stored
     logger.info("Storing the data")
-    store_data(data)  # Store the data in the mongodb database
+    await store_data(data)  # Store the data in the mongodb database
 
 
 def clean_res(api_res) -> dict():

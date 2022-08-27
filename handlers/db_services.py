@@ -2,7 +2,7 @@ from asyncio.log import logger
 from data.videos import Video
 
 
-def store_data(data: list):
+async def store_data(data: list):
     """
     Store data in the database by looping through
     the data and storing each data in the database.
@@ -15,16 +15,15 @@ def store_data(data: list):
     for vid in data:
         if search_video_by_id(vid["videoId"]):
             logger.warn(
-                f"Video {vid['title']}:{vid['videoId']} already\
-                    exists in the database, Skipping"
+                f"Video \"{vid['title']}:{vid['videoId']}\" already exists in the database, Skipping"
             )
             continue
-        store_vid(vid)
+        await store_vid(vid)
 
     return True
 
 
-def store_vid(vid: dict):
+async def store_vid(vid: dict):
     """
     Store data in the database by looping through
     the data and storing each data in the database.
@@ -45,7 +44,7 @@ def store_vid(vid: dict):
     video.URL = vid["URL"]
 
     video.save()
-    logger.info(f"Video {vid['title']}:{vid['videoId']} saved in the database")
+    logger.info(f"Video \"{vid['title']}:{vid['videoId']}\" saved in the database")
 
     return True
 
