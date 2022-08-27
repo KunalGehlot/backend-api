@@ -4,13 +4,13 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def get_keys() -> dict:
+def get_keys() -> list():
     """
     Reads the api_keys.json file and returns the keys
 
     Args: None
     Raises: OSError if the file is not found
-    Returns: dict of keys
+    Returns: [dict] of keys
     """
     try:
         logger.debug("Reading keys")
@@ -23,7 +23,7 @@ def get_keys() -> dict:
         raise OSError
 
 
-def update_keys(keys) -> None:
+def update_keys(keys):
     """
     Stores the keys in the api_keys.json file
 
@@ -40,3 +40,20 @@ def update_keys(keys) -> None:
     except Exception as e:
         logger.error("Error at updating keys: %s", e)
         raise OSError
+
+
+def process_keys(keys) -> tuple(dict, int):
+    """
+    Processes the keys and returns the key
+    which is still valid
+
+    Args: keys - dict of keys
+    Raises: None
+    Returns:
+    """
+
+    logger.debug("Processing keys")
+
+    for item, index in enumerate(keys):
+        if keys[item]["status"] == "OK":
+            return item, index

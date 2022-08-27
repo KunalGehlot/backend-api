@@ -4,6 +4,7 @@ import uvicorn  # Sweet little Async SGI
 
 from routes import yt
 from fastapi import FastAPI  # We need a Fast, Scalable API
+from handlers.async_ops import worker
 
 # Initialize the logger
 logger = logging.basicConfig(
@@ -23,10 +24,10 @@ async def main() -> None:
     while True:
         logger.debug("Async main() loop")
 
-        asyncio.ensure_future(some_work())
-        await asyncio.sleep(10)
+        asyncio.ensure_future(worker())  # Start the worker
+        await asyncio.sleep(10)  # Sleep for 10 seconds
 
-        break  # For development purposes (Could be a part of args)
+        break  # For development purposes (Could be a part of input args)
 
 
 if __name__ == "__main__":

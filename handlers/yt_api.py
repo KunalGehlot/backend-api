@@ -36,12 +36,16 @@ async def list_videos(
         return res
     except requests.exceptions.HTTPError as errh:
         logger.error("Http Error:", errh)
+        raise errh
     except requests.exceptions.ConnectionError as errc:
         logger.error("Error Connecting:", errc)
+        raise errc
     except requests.exceptions.Timeout as errt:
         logger.error("Timeout Error:", errt)
+        raise errt
     except requests.exceptions.RequestException as err:
         if "403" in str(err):
             logger.error("Quota exceeded")
             return 403
         logger.error("OOps: Something Else", err)
+        raise err
