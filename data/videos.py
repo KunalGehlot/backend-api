@@ -6,14 +6,10 @@ from mongoengine import DateTimeField, StringField
 class Video(mongoengine.Document):
     title = StringField(required=True)
     videoId = StringField(required=True)
-    description = StringField(required=True)
+    description = StringField(required=False)
     publishedAt = DateTimeField(required=True)
     channelTitle = StringField(required=True)
-    thumb = StringField(required=True)
-    URL = StringField(required=True)
+    thumb = StringField(required=False)
+    URL = StringField(required=False)
 
-    meta = {
-        "collection": "videos", 
-        "db_alias": "default", 
-        "indexes": ["videoId"]
-    }
+    meta = {"collection": "videos", "db_alias": "default", "indexes": ["videoId"]}

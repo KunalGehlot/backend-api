@@ -3,7 +3,7 @@ import logging  # Cannot have an API without a logger
 import uvicorn  # Sweet little Async SGI
 
 from time import sleep
-from routes import routes
+from routes import my_route
 from fastapi import FastAPI  # We need a Fast, Scalable API
 from handlers.async_ops import worker
 from data.mongo_setup import global_init
@@ -18,7 +18,7 @@ logger = logging.getLogger("my_logger")
 # Initialize FastAPI
 app = FastAPI()
 # Include all the routes
-app.include_router(routes.router)
+app.include_router(my_route.router)
 
 
 @app.on_event("startup")
@@ -27,7 +27,7 @@ async def startup():
     global_init()  # Initialize the database
 
     logger.info("Starting Backgroung Async Tasks")
-    await main()  # Run the main function in the background
+    # await main()  # Run the main function in the background
 
 
 async def main() -> None:
