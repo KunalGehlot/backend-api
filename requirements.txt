@@ -1,9 +1,11 @@
-logEZ
-asyncio
+sys
+time
+json
+typing
 fastapi
-mongodb
-gunicorn
+uvicorn
+logging
 requests
 datetime
+pydantic
 mongoengine
-fastapi-utils
