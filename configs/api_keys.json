@@ -1,12 +1,10 @@
-{
-    "keys": [
-        {
-            "key": "AIzaSyBduLH_g4paFi7wTo6oGzBJ5cLLVNPuEE0",
-            "status": "OK"
-        },
-        {
-            "key": "AIzaSyDqpGPPxoJJF7NfdlEF-PI21OBd70LFAY0",
-            "status": "OK"
-        }
-    ]
-}
+[
+    {
+        "key": "AIzaSyBduLH_g4paFi7wTo6oGzBJ5cLLVNPuEE0",
+        "status": "OK"
+    },
+    {
+        "key": "AIzaSyDqpGPPxoJJF7NfdlEF-PI21OBd70LFAY0",
+        "status": "OK"
+    }
+]
