@@ -1,12 +1,37 @@
+import logging  # Cannot have an API without a logger
+import asyncio  # Asyncio is a library that allows you to write async programs
 import uvicorn  # Sweet little Async SGI
+
 from routes import yt
 from fastapi import FastAPI  # We need a Fast, Scalable API
 
-# Generate
+# Initialize the logger
+logger = logging.basicConfig(
+    level=logging.DEBUG,
+    format="%(asctime)s %(name)s %(levelname)s:%(message)s",
+)
+logger = logging.getLogger(__name__)
+# Initialize FastAPI
 app = FastAPI()
-
 # Include all the routes
 app.include_router(yt.router)
 
-if __name__ == '__main__':
-    uvicorn.run(app, port=4400)
+
+async def main() -> None:
+    logger.debug("Async main() called")
+
+    while True:
+        logger.debug("Async main() loop")
+
+        asyncio.ensure_future(some_work())
+        await asyncio.sleep(10)
+
+        break  # For development purposes (Could be a part of args)
+
+
+if __name__ == "__main__":
+    logger.info("Starting up fam(ily)")
+    uvicorn.run(app, port=8888)  # Run the app on port 8888
+
+    logger.info("Starting Backgroung Async Tasks")
+    asyncio.run(main())  # Run the main function in the background

@@ -1,4 +1,5 @@
 logEZ
+asyncio
 fastapi
 mongodb
 gunicorn
