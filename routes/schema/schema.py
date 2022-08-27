@@ -20,6 +20,14 @@ class Video(BaseModel):
 
 
 class Response(BaseModel):
-    """Response model"""
+    """
+    Response model
+
+    Could be extended with
+    "page_number", "page_size"
+    and "total_record_count"
+    for better pagination in
+    the future.
+    """
 
     __root__: List[Video]
