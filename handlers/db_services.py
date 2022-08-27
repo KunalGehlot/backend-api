@@ -1,5 +1,8 @@
-from asyncio.log import logger
+import logging
+
 from data.videos import Video
+
+logger = logging.getLogger("my_logger")
 
 
 async def store_data(data: list):
