@@ -34,4 +34,7 @@ async def get_vids(limit: int, page: int):
         page = 1
 
     logger.info(f"Reading videos with limit {limit} and page {page}")
-    return Video.objects().skip((page - 1) * limit).limit(limit)
+    result = Video.objects().skip((page - 1) * limit).limit(limit)
+    results = [ob.to_mongo().to_dict() for ob in result]
+    logger.error(type(results))
+    return results

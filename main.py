@@ -34,13 +34,10 @@ async def main() -> None:
     """Entry point for the application"""
 
     logger.debug("Async main() called")
-
     while True:
         logger.debug("Async main() loop")
-
         await worker()  # Start the worker
         sleep(10)  # Sleep for 10 seconds
-
         # break  # For development purposes (Could be a part of input args)
 
 
