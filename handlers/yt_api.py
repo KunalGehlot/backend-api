@@ -16,7 +16,7 @@ async def list_videos(
     q="Food",  # I'm just hungry...
     order="date",
     qtype="video",
-    max_results=2,
+    max_results=25,
     part="snippet",
     published_after="2019-01-01T00:00:00Z",
 ) -> requests.Response:

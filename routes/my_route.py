@@ -49,8 +49,9 @@ async def get_vids(limit: int, page: int):
         if limit == -1:
             result = Video.objects()  # Get all the videos
         # If no limit is provided, default to 1
-        elif limit is None or limit <= 1:
-            limit = 2
+        else:
+            if limit is None or limit <= 1:
+                limit = 2
             # If no page is provided, default to 1
             if page is None or page <= 1:
                 page = 1
@@ -67,3 +68,27 @@ async def get_vids(limit: int, page: int):
     except Exception as e:
         logger.error(f"Error reading videos: {e}")
         return {"error": str(e)}
+
+
+@router.get("/search", response_model=schema.Response)
+def search(query: str):
+    """
+    Search for videos in the database
+    Args:
+        query (str): The query to search for
+    Returns:
+        Response: The response object
+    Raises:
+        Default Exception
+    """
+    try:
+        logger.info(f"Searching for videos with query {query}")
+        result = Video.objects.search_text(query).order_by("$text_score")
+        # Convert to dicts
+        results = [ob.to_mongo().to_dict() for ob in result]
+        if len(results) == 0:
+            return {"Error": "No results found"}
+        return results
+    except Exception as e:
+        logger.error(f"Error searching for videos: {e}")
+        return {"Error": str(e)}
