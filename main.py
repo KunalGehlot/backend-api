@@ -2,7 +2,7 @@ import logging  # Cannot have an API without a logger
 import asyncio  # Asyncio is a library that allows you to write async programs
 import uvicorn  # Sweet little Async SGI
 
-from routes import yt
+from routes import reader
 from fastapi import FastAPI  # We need a Fast, Scalable API
 from handlers.async_ops import worker
 from data.mongo_setup import global_init
@@ -16,7 +16,7 @@ logger = logging.getLogger(__name__)
 # Initialize FastAPI
 app = FastAPI()
 # Include all the routes
-app.include_router(yt.router)
+app.include_router(reader.router)
 
 
 async def main() -> None:
