@@ -49,7 +49,7 @@ def process_keys(keys) -> tuple[dict, int]:
 
     Args: keys - dict of keys
     Raises: None
-    Returns:
+    Returns: None
     """
 
     logger.debug("Processing keys")

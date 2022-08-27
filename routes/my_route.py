@@ -11,6 +11,8 @@ logger = logging.getLogger("my_logger")
 
 @router.get("/")
 def read_root():
+    """Read the root of the API"""
+
     html_content = """
     <html>
         <head>
@@ -22,19 +24,47 @@ def read_root():
         </body>
     </html>
     """
+    # Return the HTML content
     return HTMLResponse(content=html_content, status_code=200)
 
 
 @router.get("/get-videos", response_model=schema.Response)
 async def get_vids(limit: int, page: int):
-    if limit is None or limit <= 1:
-        limit = 2
+    """
+    Get all the videos in the database
+    if limit is -1 OR get a specific page
+    of videos with a limit of videos per page
 
-    if page is None or page <= 1:
-        page = 1
+    Args:
+        limit (int): The number of videos per page
+        page (int): The page number
 
-    logger.info(f"Reading videos with limit {limit} and page {page}")
-    result = Video.objects().skip((page - 1) * limit).limit(limit)
-    results = [ob.to_mongo().to_dict() for ob in result]
-    logger.error(type(results))
-    return results
+    Returns:
+        Response: The response object
+
+    Raises:
+        Default Exception
+    """
+    try:
+        if limit == -1:
+            result = Video.objects()  # Get all the videos
+            # Convert to dicts
+            results = [ob.to_mongo().to_dict() for ob in result]
+            return results
+        # If no limit is provided, default to 1
+        elif limit is None or limit <= 1:
+            limit = 2
+            # If no page is provided, default to 1
+            if page is None or page <= 1:
+                page = 1
+
+            logger.info(f"Reading videos with limit {limit} and page {page}")
+            result = (
+                Video.objects().skip((page - 1) * limit).limit(limit)
+            )  # Get the videos
+            # Convert to dicts
+            results = [ob.to_mongo().to_dict() for ob in result]
+            return results
+    except Exception as e:
+        logger.error(f"Error reading videos: {e}")
+        return {"error": str(e)}

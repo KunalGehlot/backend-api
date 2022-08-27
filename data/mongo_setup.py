@@ -2,4 +2,5 @@ import mongoengine
 
 
 def global_init():
-    mongoengine.register_connection(alias='default', name='family')
+    """Initialize the database"""
+    mongoengine.register_connection(alias="default", name="family")

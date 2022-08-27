@@ -20,7 +20,7 @@ async def store_data(data: list):
             continue
         await store_vid(vid)
 
-    return True
+    return True  # Can be used to check for success
 
 
 async def store_vid(vid: dict):
@@ -46,7 +46,7 @@ async def store_vid(vid: dict):
     video.save()
     logger.info(f"Video \"{vid['title']}:{vid['videoId']}\" saved in the database")
 
-    return True
+    return True  # Can be used to check for success
 
 
 def search_video_by_id(video_id: str):

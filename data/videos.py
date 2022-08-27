@@ -4,6 +4,8 @@ from mongoengine import DateTimeField, StringField
 
 
 class Video(mongoengine.Document):
+    """Video model"""
+
     title = StringField(required=True)
     videoId = StringField(required=True)
     description = StringField(required=False)
