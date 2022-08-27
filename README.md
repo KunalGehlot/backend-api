@@ -56,7 +56,11 @@ The application logs are available in the console and in the
 ## NOTICE ⚠️
 THIS IS A MPL 2.0 LICENSED PROJECT. IT IS A COPYLEFT LICENSE.
 
-MPL 2.0: https://www.mozilla.org/en- [x]US/MPL/2.0/
+A copyleft license is a license that grants the right to copy, distribute and/or modify the work under certain conditions. The conditions are that the work is available for **non-commercial use only**, and the work is not distributed or modified in any way that would require the modified work or parts of it to be shared with anyone other than the original owner.
+
+If you want to copy, distribute or modify the work, you have to obtain a license from the original owner.
+
+MPL 2.0: https://www.mozilla.org/en-US/MPL/2.0/
 
 # Because it's about Fam(ily) 🤗
 
