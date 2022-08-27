@@ -46,7 +46,7 @@ async def list_videos(
         "maxResults": max_results,
         "publishedAfter": published_after,
     }
-
+    logger.info("Searching for videos")
     try:
         res = await requests.get(
             BASE_URL, headers=HEADERS, params=params
@@ -72,4 +72,3 @@ async def list_videos(
             logger.error("Quota exceeded")
             return 403
         logger.error("OOps: Something Else", err)
-        raise err  # Raise the error to the caller

@@ -20,6 +20,8 @@ app.include_router(yt.router)
 
 
 async def main() -> None:
+    """Entry point for the application"""
+
     logger.debug("Async main() called")
 
     while True:
@@ -32,6 +34,8 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
+    """If this is the main file, run the main function"""
+
     logger.info("Starting up fam(ily)")
     uvicorn.run(app, port=8888)  # Run the app on port 8888
 

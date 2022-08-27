@@ -22,14 +22,16 @@ async def worker() -> None:
     api_res = await list_videos(k_obj["key"])
 
     if api_res == 403:
-        logging.info("Updating the key status")
+        logging.warn("Updating the key status")
         k_obj["status"] = "Quota exceeded"  # Update the status of the key
         keys[index] = k_obj  # Update the key in the keys list
         update_keys(keys)  # Update the keys in the file
         logging.warn("Skipping the call")
         return
 
+    logger.debug("Cleaning the response")
     data = clean_res(api_res)  # Pick the values needed to be stored
+    logger.info("Storing the data")
     store_data(data)  # Store the data in the mongodb database
 
 
