@@ -1,6 +1,6 @@
-import uvicorn
+import uvicorn  # Sweet little Async SGI
 from routes import yt
-from fastapi import FastAPI
+from fastapi import FastAPI  # We need a Fast, Scalable API
 
 # Generate
 app = FastAPI()

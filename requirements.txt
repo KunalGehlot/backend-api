@@ -1,4 +1,7 @@
 logEZ
 fastapi
+mongodb
 gunicorn
+requests
+datetime
 fastapi-utils
