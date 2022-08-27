@@ -3,8 +3,7 @@ Goal: To make an API to fetch the latest videos sorted in reverse chronological 
 
 ### Tasks ✅
 
-- [x] The server should call the YouTube API continuously in the background (async) with some interval (say 10 seconds) for fetching the latest videos for a predefined search query and should store the data of videos (specifically these fields 
-- - [x] Video title, description, publishing DateTime, thumbnail URLs and any other fields you require) in a database with proper indexes.
+- [x] The server should call the YouTube API continuously in the background (async) with some interval (say 10 seconds) for fetching the latest videos for a predefined search query and should store the data of videos (specifically these fields - Video title, description, publishing DateTime, thumbnail URLs and any other fields you require) in a database with proper indexes.
 
 - [x] A GET API that returns the stored video data in a paginated response sorted in descending order of published DateTime.
 
