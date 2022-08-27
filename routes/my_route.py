@@ -48,9 +48,6 @@ async def get_vids(limit: int, page: int):
     try:
         if limit == -1:
             result = Video.objects()  # Get all the videos
-            # Convert to dicts
-            results = [ob.to_mongo().to_dict() for ob in result]
-            return results
         # If no limit is provided, default to 1
         elif limit is None or limit <= 1:
             limit = 2
@@ -62,9 +59,11 @@ async def get_vids(limit: int, page: int):
             result = (
                 Video.objects().skip((page - 1) * limit).limit(limit)
             )  # Get the videos
-            # Convert to dicts
-            results = [ob.to_mongo().to_dict() for ob in result]
-            return results
+        # Convert to dicts
+        results = [ob.to_mongo().to_dict() for ob in result]
+        # Sort the results by publishedAt in reverse order
+        results = sorted(results, key=lambda d: d["publishedAt"], reverse=True)
+        return results
     except Exception as e:
         logger.error(f"Error reading videos: {e}")
         return {"error": str(e)}
