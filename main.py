@@ -27,7 +27,7 @@ async def startup():
     global_init()  # Initialize the database
 
     logger.info("Starting Backgroung Async Tasks")
-    # await main()  # Run the main function in the background
+    await main()  # Run the main function in the background
 
 
 async def main() -> None:

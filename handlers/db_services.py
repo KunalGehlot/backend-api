@@ -1,5 +1,6 @@
 import logging
 
+from datetime import datetime
 from data.videos import Video
 
 logger = logging.getLogger("my_logger")
@@ -41,7 +42,7 @@ async def store_vid(vid: dict):
     video.title = vid["title"]
     video.videoId = vid["videoId"]
     video.description = vid["description"]
-    video.publishedAt = vid["publishedAt"]
+    video.publishedAt = datetime.strptime(vid["publishedAt"], "%Y-%m-%dT%H:%M:%SZ")
     video.channelTitle = vid["channelTitle"]
     video.thumb = vid["thumb"]
     video.URL = vid["URL"]
