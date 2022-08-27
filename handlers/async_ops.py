@@ -52,6 +52,7 @@ def clean_res(api_res) -> dict():
         data = dict()
 
         data["title"] = item["snippet"]["title"]
+        data["videoId"] = item["id"]["videoId"]
         data["description"] = item["snippet"]["description"]
         data["publishedAt"] = item["snippet"]["publishedAt"]
         data["channelTitle"] = item["snippet"]["channelTitle"]
