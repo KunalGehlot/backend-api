@@ -1,0 +1,4 @@
+logEZ
+fastapi
+gunicorn
+fastapi-utils
