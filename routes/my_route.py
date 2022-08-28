@@ -2,15 +2,15 @@ import logging
 
 from .schema import schema
 from fastapi import APIRouter
-from data.videos import Video
 from fastapi.responses import HTMLResponse
+from handlers.db_services import get_videos_paginated, search_video
 
 router = APIRouter()
 logger = logging.getLogger("my_logger")
 
 
 @router.get("/")
-def read_root():
+async def read_root():
     """Read the root of the API"""
 
     html_content = """
@@ -46,24 +46,9 @@ async def get_vids(limit: int, page: int):
         Default Exception
     """
     try:
-        if limit == -1:
-            result = Video.objects()  # Get all the videos
-        # If no limit is provided, default to 1
-        else:
-            if limit is None or limit <= 1:
-                limit = 2
-            # If no page is provided, default to 1
-            if page is None or page <= 1:
-                page = 1
-
-            logger.info(f"Reading videos with limit {limit} and page {page}")
-            result = (
-                Video.objects().skip((page - 1) * limit).limit(limit)
-            )  # Get the videos
+        result = get_videos_paginated(limit, page)
         # Convert to dicts
         results = [ob.to_mongo().to_dict() for ob in result]
-        # Sort the results by publishedAt in reverse order
-        results = sorted(results, key=lambda d: d["publishedAt"], reverse=True)
         return results
     except Exception as e:
         logger.error(f"Error reading videos: {e}")
@@ -71,7 +56,7 @@ async def get_vids(limit: int, page: int):
 
 
 @router.get("/search", response_model=schema.Response)
-def search(query: str):
+async def search(query: str):
     """
     Search for videos in the database
     Args:
@@ -82,8 +67,7 @@ def search(query: str):
         Default Exception
     """
     try:
-        logger.info(f"Searching for videos with query {query}")
-        result = Video.objects.search_text(query).order_by("$text_score")
+        result = search_video(query)
         # Convert to dicts
         results = [ob.to_mongo().to_dict() for ob in result]
         if len(results) == 0:

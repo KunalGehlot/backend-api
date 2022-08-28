@@ -63,3 +63,47 @@ def search_video_by_id(video_id: str):
     """
 
     return Video.objects(videoId=video_id).first()
+
+
+async def get_videos_paginated(limit: int, page: int):
+    """
+    Get videos paginated.
+
+    Args: limit (int) - limit of videos to be returned
+    page (int) - page number
+    Returns: list of Video query
+    Raises: None
+    """
+
+    if limit == -1:
+        result = Video.objects()  # Get all the videos
+    # If no limit is provided, default to 1
+    else:
+        if limit is None or limit <= 1:
+            limit = 2
+        # If no page is provided, default to 1
+        if page is None or page <= 1:
+            page = 1
+
+        logger.info(f"Reading videos with limit {limit} and page {page}")
+        result = (
+            Video.objects()
+            .order_by("-publishedAt")
+            .skip((page - 1) * limit)
+            .limit(limit)
+        )  # Get the videos
+
+    return result
+
+
+async def search_video(query: str):
+    """
+    Search for a video by its title and descriptio.
+
+    Args: search_term (str) - title of the video to be searched for
+    Returns: Video object if found, None otherwise
+    Raises: None
+    """
+    logger.info(f"Searching for videos with query {query}")
+    result = Video.objects.search_text(query).order_by("$text_score")
+    return result
