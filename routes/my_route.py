@@ -46,7 +46,7 @@ async def get_vids(limit: int, page: int):
         Default Exception
     """
     try:
-        result = get_videos_paginated(limit, page)
+        result = await get_videos_paginated(limit, page)
         # Convert to dicts
         results = [ob.to_mongo().to_dict() for ob in result]
         return results
@@ -67,7 +67,7 @@ async def search(query: str):
         Default Exception
     """
     try:
-        result = search_video(query)
+        result = await search_video(query)
         # Convert to dicts
         results = [ob.to_mongo().to_dict() for ob in result]
         if len(results) == 0:
