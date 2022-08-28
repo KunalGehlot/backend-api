@@ -1,8 +1,8 @@
 import sys
+import asyncio
 import logging  # Cannot have an API without a logger
 import uvicorn  # Sweet little Async SGI
 
-from time import sleep
 from routes import my_route
 from fastapi import FastAPI  # We need a Fast, Scalable API
 from handlers.async_ops import worker
@@ -27,7 +27,7 @@ async def startup():
     global_init()  # Initialize the database
 
     logger.info("Starting Backgroung Async Tasks")
-    await main()  # Run the main function in the background
+    asyncio.create_task(main())  # Run the main function in the background
 
 
 async def main() -> None:
@@ -37,7 +37,7 @@ async def main() -> None:
     while True:
         logger.debug("Async main() loop")
         await worker()  # Start the worker
-        sleep(10)  # Sleep for 10 seconds
+        await asyncio.sleep(10)  # Sleep for 10 seconds
         # break  # For development purposes (Could be a part of input args)
 
 
